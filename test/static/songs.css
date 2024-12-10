@@ -1,0 +1,69 @@
+/* style.css */
+/* Style the container for the list of songs */
+.songs-list {
+    margin-top: 20px;
+}
+.hr{
+    color:white;
+}
+/* Style the album cover image in each song item */
+.songs-list td img {
+    width: 100px; /* Adjust image width as needed */
+    height: 80px; /* Maintain aspect ratio */
+    margin-right: 0px;
+    border-radius: 3px;
+    align-items: center;
+    margin-left: 5px; /* Rounded corners */
+}
+.songs-list h4{
+    color:white;
+    margin-top:5px;
+}
+.songs-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.songs-list tr{
+    width:100%;
+    padding:10%;
+}
+
+.songs-list td {
+    /* border: 1px solid #ddd; */
+    padding: 5px;
+    color: white;
+}
+
+/* Style alternate rows */
+.songs-list tbody tr:nth-child() {
+    background-color: #f2f2f2;
+}
+/* Add this CSS to your existing style.css file */
+.songs-list table td {
+    padding: 5px;
+    font-size: large; /* Adjust the padding as needed */
+}
+
+.songs-list table td img {
+    display: block; /* Ensure the image is displayed as a block element */
+    margin-bottom: 10px; /* Add margin below the image */
+    width:100px;
+}
+
+.songs-list table td:first-child {
+    width: 150px; /* Adjust the width of the first column (album cover) */
+}
+.songs-list table:hover {
+    border: 1px solid #000; /* Define the border style when the table is hovered */
+}
+
+/* .songs-list table tr:hover {
+    background-color: lightslategray; /* Change background color of table row when hovered 
+}*/
+/* .songs-list table td:fourth-child {
+    width: 100px; /* Adjust the width of the first column (album cover) */
+/* }*/ 
+.songs-list table thead tr th{
+    color:#f2f2f2;
+    text-align: center;
+}

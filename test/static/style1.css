@@ -1,0 +1,73 @@
+body {
+  font-family: Arial, sans-serif;
+  background-image: url('/static/images/login_page_background2.gif'); /* Specify the path to your background image */
+  background-size: cover;
+  background-position: center;
+  height: 100vh; /* Ensure the background covers the entire viewport height */
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+    position: absolute;
+    margin-top: 150px;
+    margin-left: 500px;
+    /* transform: translate(-50%, -50%); */
+    background-color: black;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 500px;
+}
+
+.container h1 {
+    text-align: center;
+    margin-bottom: 10px;
+    color:white;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color:white;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+}
+
+.form-group input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.form-group input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.form-group .register-link {
+    text-align: center;
+}
+
+.form-group .register-link a {
+    color: #007bff;
+    text-decoration:dashed;
+}
+.form-group .register-link a:hover {
+    text-decoration: underline;
+}
+
+.form-error{
+    color:white;
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ProfilePage</title>
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='account.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+
+  </head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark" bg-body-tertiary>
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <img src="static/images/logo1.png" height="45px">
+            </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/index">LyricLoom</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/playlist">Playlist</a>
+          </li>
+          <li class="nav-item">
+            <a  class="nav-link" href="/mymedia">My Media</a>
+          </li>
+          <li class="nav-item">
+            <a  class="nav-link" href="/login">Logout</a>
+          </li>
+          <li class="nav-item">
+            {% if email %}
+            <p style="font-size: 16px; font-weight: bold; color: white;">Email: {{ email }}</p>
+            {% endif %}
+        </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+<div class="container">
+  <h1 class="text">My Profile</h1>
+  <hr>
+  <div class="row">
+    <!-- left column -->
+    <div class="col-md-3">
+      <div class="text-center">
+        
+      </div>
+    </div>
+    
+    <!-- edit form column -->
+     <div class="col-md-9 personal-info">
+      <h3 class="#">Personal info</h3>
+      
+      <form class="form-horizontal" role="form">
+        <div class="form-group">
+          <label class="col-lg-3 control-label" id="first_name">First name:</label>
+          <div class="col-lg-8">
+            <input class="form-control " type="text" value="{{ user_info.first_name }}" readonly></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label" id="last_name">Last name:</label>
+          <div class="col-lg-8">
+            <input class="form-control" type="text" value="{{ user_info.last_name }}" readonly>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label" id="email">Username:</label>
+          <div class="col-lg-8">
+            <input class="form-control" type="text" value="{{ user_info.email }}" readonly>
+            
+          </div>
+        </div>
+      </form>
+    </div>
+</div>
+<div class="graph-container">
+  <img src="data:image/png;base64,{{ chart_url }}" alt="User Activity Graph">
+</div>
+</div>
+<hr>
+</body>
+</html>

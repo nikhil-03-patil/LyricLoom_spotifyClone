@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='songs.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark" bg-body-tertiary>
+    <div class="container-fluid">
+      <!-- <a class="navbar-brand" href="#">
+        <img src="bootstrap-icons-1.11.3/music-note-list.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
+        LyricLoom
+      </a> -->
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <img src="static/images/logo1.png" height="45px">
+            </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/index.html">LyricLoom</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/playlist">Playlist</a>
+          </li>
+          <li class="nav-item">
+            <a  class="nav-link" href="/mymedia">My Media</a>
+          </li>
+          <li class="nav-item">
+            <a  class="nav-link" href="/account">Profile</a>
+          </li>
+          <li class="nav-item">
+            {% if email %}
+            <p style="font-size: 16px; font-weight: bold; color: white;">Email: {{ email }}</p>
+            {% endif %}
+        </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <div class="wrapper">
+        <div class="main p-3">
+          <div class="-bar">
+            <div class="row">
+              <div class="col-4"></div>
+              <div class="col-4">
+               
+                <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+              </div>
+              <div class="col-4"></dv>
+  
+            </div>
+            
+        </div> 
+          <br>
+        <div class="artist">
+              <h4 style="color:white ; padding-left:20px">  Popular Artist</h4>
+              <div class="list">
+                <div class="circle-image" id="asId">
+                  <img src="static\images\as.jpg" >
+                </div>
+                <div class="circle-image" id="aaId">
+                  <img src="static\images\aa.jpg">
+                </div>
+                <div class="circle-image">
+                  <img src="static\images\DR.jpg" alt="GHOST DEATZ">
+                </div>
+                <div class="circle-image">
+                  <img src="static\images\KK.jpg" alt="GHOST DEATZ">
+                </div>
+                <div class="circle-image">
+                  <img src="static\images\sc.jpg" alt="GHOST DEATZ">
+                </div>
+                <div class="circle-image">
+                  <img src="static\images\sg.jpg" alt="GHOST DEATZ">
+                </div>
+                <div class="circle-image">
+                  <img src="static\images\sn.jpg" alt="GHOST DEATZ">
+                </div>
+                <div class="circle-image">
+                  <img src="static\images\K-K.jpg" alt="GHOST DEATZ">
+                </div> 
+                <div class="circle-image">
+                  <img src="static\images\nk.jpg" alt="GHOST DEATZ">
+                </div> 
+            </div>
+      </div>
+        <hr>
+       
+        <div class="songs-list" id="mainDiv" > 
+        <table>
+          <thead>
+            <tr>
+                <th>Album Cover</th>
+                <th>Song Name</th>
+                <th>Genre</th>
+                <th>Duration</th>
+                <th>Favorites</th>
+                <th>Add</th>
+            </tr>
+        </thead>
+            <tbody>
+              <tr>
+                <td><img src="static/images/Chaleya.jpg" alt="Song 1"></td>
+                <td>Chaleya</td>
+                <td>Happy</td>
+                <td><audio id="audio-player" controls>
+                  <source src="static\songs\Chaleya.mp3" type="audio/mpeg">
+                  Your browser does not support the audio element.
+              </audio></td>
+                <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+            </tr>
+            
+            
+                <tr>
+                    <td><img src="static/images/TumseHe.jpeg" alt="Song 2"></td>
+                    <td>Tumse hi</td>
+                    <td>Romantic</td>
+                    <td><audio id="audio-player" controls>
+                      <source src="static\songs\TumSeHi.mp3" type="audio/mpeg">
+                      Your browser does not support the audio element.
+                  </audio></td>
+                    <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                    <td> 
+                      <i class="fas fa-plus"></i> <!-- Plus icon -->
+                    </td>
+                </tr>
+                <tr>
+                  <td><img src="static/images/WohLamhe.jpg" alt="Song 2"></td>
+                  <td>Woh Lamhe Woh Baatein
+                  </td>
+                  <td>Romantic,Love</td>
+                  <td><audio id="audio-player" controls>
+                    <source src="static\songs\WohLamheWohBaatein.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio></td>
+                  <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                  <td> 
+                    <i class="fas fa-plus"></i> <!-- Plus icon -->
+                  </td>
+              </tr>
+              <tr>
+                <td><img src="static/images/TeriBaaton.jpg" alt="Song 2"></td>
+                <td>Teri Baaton Mein Aisa Ulja Jiya
+                </td>
+                <td>Happy, Fun</td>
+                <td><audio id="audio-player" controls>
+                  <source src="static\songs\TeriBaatonMeinAisaUljhaJiya.mp3" type="audio/mpeg">
+                  Your browser does not support the audio element.
+              </audio></td>
+                <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                <td> 
+                  <i class="fas fa-plus"></i> <!-- Plus icon -->
+                </td>
+            </tr>
+            <tr>
+              <td><img src="static/images/ChikniChameli.jpg" alt="Song 2"></td>
+              <td>Chikni Chameli
+              </td>
+              <td>Item, Dance</td>
+              <td><audio id="audio-player" controls>
+                <source src="static\songs\ChikniChameli.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio></td>
+              <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+              <td> 
+                <i class="fas fa-plus"></i> <!-- Plus icon -->
+              </td>
+          </tr>
+          <tr>
+            <td><img src="static/images/HamariAdhuriKahani.jpg" alt="Song 2"></td>
+            <td>Hamari Adhuri Kahani</td>
+            <td>Sad</td>
+            <td><audio id="audio-player" controls>
+              <source src="static\songs\HamariAdhuriKahani.mp3" type="audio/mpeg">
+              Your browser does not support the audio element.
+          </audio></td>
+            <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+            <td> 
+              <i class="fas fa-plus"></i> <!-- Plus icon -->
+            </td>
+          </tr>
+          <tr>
+            <td><img src="static/images/Heeriye.jpg" alt="Song 2"></td>
+            <td>Heeriye</td>
+            <td>Romantic</td>
+            <td><audio id="audio-player" controls>
+              <source src="static\songs\Heeriye.mp3" type="audio/mpeg">
+              Your browser does not support the audio element.
+          </audio></td>
+            <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+            <td> 
+              <i class="fas fa-plus"></i> <!-- Plus icon -->
+            </td>
+          </tr>
+          <tr>
+            <td><img src="static/images/BeIntehaan.jpg" alt="Song 2"></td>
+            <td>BeIntehaan</td>
+            <td>Romantic,Love</td>
+            <td><audio id="audio-player" controls>
+              <source src="static\songs\BeIntehaan.mp3" type="audio/mpeg">
+              Your browser does not support the audio element.
+          </audio></td>
+            <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+            <td> 
+              <i class="fas fa-plus"></i> <!-- Plus icon -->
+            </td>
+            </tr>
+            <tr>
+              <td><img src="static/images/JeeneLagaHoon.jpg" alt="Song 2"></td>
+              <td>Jeena Laga Hoon</td>
+              <td>Romantic</td>
+              <td><audio id="audio-player" controls>
+                <source src="static\songs\JeeneLagaHoon.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio></td>
+              <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+              <td> 
+                <i class="fas fa-plus"></i> <!-- Plus icon -->
+              </td>
+            </tr>
+            <tr>
+              <td><img src="static/images/TeraHoneLagaHoon.jpg" alt="Song 2"></td>
+              <td>Tera Hone Laga Hoon</td>
+              <td>Romantic</td>
+              <td><audio id="audio-player" controls>
+                <source src="static\songs\TeraHoneLagaHoon.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio></td>
+              <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+              <td> 
+                <i class="fas fa-plus"></i> <!-- Plus icon -->
+              </td>
+            </tr>
+                
+            </tbody>
+        </table>
+        </div>
+
+
+        <div class="songs-list" id="ArjitSingh_mainDiv" style="display: none;"> 
+
+          <p style="font-weight: bold; color: white; font-size: 40px;">Arjit Singh Song List</p>
+
+          <table>
+            <thead>
+              <tr>
+                  <th>Album Cover</th>
+                  <th>Song Name</th>
+                  <th>Genre</th>
+                  <th>Duration</th>
+                  <th>Favorites</th>
+                  <th>Add</th>
+              </tr>
+          </thead>
+              <tbody>
+                <tr>
+                  <td><img src="static/images/Chaleya.jpg" alt="Song 1"></td>
+                  <td>Chaleya</td>
+                  <td>Happy</td>
+                  <td><audio id="audio-player" controls>
+                    <source src="static\songs\Chaleya.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio></td>
+                  <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                  <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+              </tr>
+              
+              
+                  <tr>
+                      <td><img src="static/images/TumseHe.jpeg" alt="Song 2"></td>
+                      <td>Tumse hi</td>
+                      <td>Romantic</td>
+                      <td><audio id="audio-player" controls>
+                        <source src="static\songs\TumSeHi.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio></td>
+                      <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                      <td> 
+                        <i class="fas fa-plus"></i> <!-- Plus icon -->
+                      </td>
+                  </tr>
+                 
+                  
+              </tbody>
+          </table>
+          </div>
+
+          <div class="songs-list" id="AtifAslam_mainDiv" style="display: none;"> 
+
+            <p style="font-weight: bold; color: white; font-size: 40px;">Atif Aslam Song List</p>
+  
+            <table>
+              <thead>
+                <tr>
+                    <th>Album Cover</th>
+                    <th>Song Name</th>
+                    <th>Genre</th>
+                    <th>Duration</th>
+                    <th>Favorites</th>
+                    <th>Add</th>
+                </tr>
+            </thead>
+                <tbody>
+                  <tr>
+                    <td><img src="static/images/Chaleya.jpg" alt="Song 1"></td>
+                    <td>Chaleya</td>
+                    <td>Happy</td>
+                    <td><audio id="audio-player" controls>
+                      <source src="static\songs\Chaleya.mp3" type="audio/mpeg">
+                      Your browser does not support the audio element.
+                  </audio></td>
+                    <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                    <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+                </tr>
+                
+                
+                  
+                   
+                    
+                </tbody>
+            </table>
+            </div>
+      </div>
+        </div>
+        
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <!-- Add this to your index.html file -->
+
+<script>
+  $(document).ready(function () {
+      $('.album-link').click(function (event) {
+          event.preventDefault();
+          var songId = $(this).data('song-id');
+          $.getJSON('/play_song/' + songId, function (data) {
+              $('#album-cover').attr('src', data.album_cover_url);
+              $('#audio-player source').attr('src', data.audio_url);
+              $('#song-name').text(data.song_name);
+              $('#audio-player')[0].load();
+              $('#audio-player')[0].play();
+              $('#bottom-panel').show();
+          });
+      });
+  });
+</script>
+<script>
+  $(document).ready(function () {
+      $('.play-btn').click(function () {
+          var audio = $('#audio-player')[0];
+          var playButton = $(this);
+          
+          if (audio.paused) {
+              audio.play();
+              playButton.text('PAUSE');
+          } else {
+              audio.pause();
+              playButton.text('PLAY');
+          }
+      });
+  });
+</script>
+
+
+<script>
+  // Function to perform search
+  function searchSongs() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("searchInput");
+      filter = input.value.toUpperCase();
+      table = document.querySelector(".songs-list table");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[1]; // Index 1 corresponds to Song Name column
+          if (td) {
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+              } else {
+                  tr[i].style.display = "none";
+              }
+          }
+      }
+  }
+
+  // Attach event listener to the search input
+  document.getElementById("searchInput").addEventListener("keyup", searchSongs);
+</script>
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      const asId = document.getElementById("asId");
+      const aaId = document.getElementById("aaId");
+      const mainDiv = document.getElementById("mainDiv");
+      const arjitSinghMainDiv = document.getElementById("ArjitSingh_mainDiv");
+      const atifAslamMainDiv = document.getElementById("AtifAslam_mainDiv");
+
+      asId.addEventListener("click", function() {
+          mainDiv.style.display = "none";
+          arjitSinghMainDiv.style.display = "block";
+          atifAslamMainDiv.style.display = "none";
+      });
+      aaId.addEventListener("click", function() {
+        mainDiv.style.display = "none";
+        arjitSinghMainDiv.style.display = "none";
+        atifAslamMainDiv.style.display = "block";
+    });
+  });
+</script>
+
+
+</body>
+
+</html>

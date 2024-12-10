@@ -1,0 +1,76 @@
+<!-- templates/view_song.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Songs</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>View Songs</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Song Name</th>
+                    <th>Mood</th>
+                    <th>Album Cover</th>
+                    <th>Song Value</th>
+                    <th>Create Date</th>
+                    <th>Active</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for song in songs %}
+                <tr>
+                    <td>{{ song.id }}</td>
+                    <td>{{ song.song_name }}</td>
+                    <td>{{ song.mood }}</td>
+                    <td><img src="data:image/jpeg;base64,{{ song.album_cover }}" alt="Album Cover" style="width:50px"></td>
+                    <td>
+                            <audio id="audio_{{ song.id }}" controls>
+                                <source src="data:audio/mpeg;base64,{{ song.song_value }}" type="audio/mp3">
+                                Your browser does not support the audio element.
+                            </audio>  
+                    </td>
+                    <td>{{ song.create_date }}</td>
+                    <td>{{ song.active }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <script>
+        var currentAudio = null;
+    
+        // Function to pause the other audio elements when a new one starts playing
+        function pauseOtherAudios(currentAudioElement) {
+            console.log("pauseOtherAudios function called"); // Log a message to indicate that the function is called
+        
+            var allAudios = document.querySelectorAll('audio');
+            allAudios.forEach(function(audio) {
+                if (audio !== currentAudioElement && !audio.paused) {
+                    audio.pause();
+                }
+            });
+        }
+        
+        // Add event listeners to each audio element
+        {% for song in songs %}
+        var audio{{ song.id }} = document.getElementById('audio_{{ song.id }}');
+        audio{{ song.id }}.addEventListener('play', function() {
+            console.log("Audio play event triggered"); // Log a message when the play event is triggered
+            pauseOtherAudios(this);
+            currentAudio = this;
+        });
+        {% endfor %}
+    </script>
+    
+</body>
+</html>

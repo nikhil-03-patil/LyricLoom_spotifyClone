@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+::after,
+::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+.navbar{
+    background-color: black;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.wrapper {
+    display: flex;
+}
+.card {
+    width:350px;
+  }
+  .card-body {
+    font-size: smaller;
+  }
+  .main {
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    transition: all 0.35s ease-in-out;
+    background-color:black;
+  }
+
+.toggle-btn {
+    background-color: transparent;
+    cursor: pointer;
+    border: 0;
+    padding: 1rem 1.5rem;
+}
+
+.toggle-btn i {
+    font-size: 1.5rem;
+    color: black;
+}
+
+.search-bar {
+    margin-bottom: 2rem;
+
+  }
+  
+  .search-bar input[type="text"] {
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+  }
+  
+  .search-bar input[type="text"]:focus {
+    box-shadow: 0 0 2px 1px rgba(0, 123, 255, 0.2);
+  }
+  .circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    border: 30px solid white;
+    border-top-color: transparent;
+  }
+.list .circle-image {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    overflow: hidden;
+    display:inline-block;
+    margin-left: 20px;
+  }
+  
+.circle-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+.artist .list{
+    display:flex;
+    gap:5px;
+    overflow: hidden;
+}
+
+.navbar .p {
+    margin-top: 20px;
+    margin-bottom: 1rem;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+.navbar-nav .nav-item .p {
+  margin-right: 50px; /* Adjust as needed */
+}
+/* Add this to your style.css file */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: center;
+  padding: 10px; /* Adjust the padding as needed */
+}
+
+img {
+  display: block; /* Ensures the image is centered within its cell */
+  margin: 0 auto; /* Centers the image horizontally */
+}
+tr.center th {
+  text-align: center;
+}
+.liked {
+  color: red;
+}
+.red {
+  color: red;
+}

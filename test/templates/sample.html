@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Songs</title>
+</head>
+<body>
+    <h1>Songs</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Genre</th>
+        </tr>
+        {% for song in songs %}
+        <tr>
+            <td>{{ song[0] }}</td>
+            <td>{{ song[1] }}</td>
+            <td>{{ song[2] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

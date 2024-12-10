@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/style.css"> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='songs.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark" bg-body-tertiary>
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <img src="static/images/logo1.png" height="45px">
+            </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/index.html">LyricLoom</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/playlist">Playlist</a>
+          </li>
+          <li class="nav-item">
+            <a  class="nav-link" href="/mymedia">My Media</a>
+          </li>
+          <li class="nav-item">
+            <a  class="nav-link" href="/account">My Profile</a>
+          </li>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                {% if email %}
+                <p class="nav-link" style="font-size: 16px; font-weight: bold; color: white;">Email: {{ email }}</p>
+                {% endif %}
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Logout</a>
+            </li>
+          </ul>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <div class="wrapper">
+        <div class="main p-3">
+          <div class="-bar">
+            <div class="row">
+              <div class="col-4"></div>
+              <div class="col-4">
+               
+                <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+              </div>
+              <div class="col-4"></dv>
+  
+            </div>
+            
+        </div> 
+          <br>
+        <div class="artist">
+              <h4 style="color:white ; padding-left:20px">  Popular Artist</h4>
+              <div class="list">
+                <div class="circle-image" id="asId">
+                  <img src="static\images\as.jpg" >
+                </div>
+                <div class="circle-image" id="aaId">
+                  <img src="static\images\aa.jpg">
+                </div>
+                <div class="circle-image" id="drId">
+                  <img src="static\images\DR.jpg" alt="GHOST DEATZ">
+                </div>
+                <div class="circle-image" id="KKId">
+                  <img src="static\images\KK.jpg" alt="GHOST DEATZ">
+                </div>
+                <div class="circle-image" id="scId">
+                  <img src="static\images\sc.jpg" alt="GHOST DEATZ">
+                </div>
+                <div class="circle-image" id="sgId">
+                  <img src="static\images\sg.jpg" alt="GHOST DEATZ">
+                </div>
+                <div class="circle-image" id="snId">
+                  <img src="static\images\sn.jpg" alt="GHOST DEATZ">
+                </div>
+                <div class="circle-image" id="KiKId">
+                  <img src="static\images\K-K.jpg" alt="GHOST DEATZ">
+                </div> 
+                <div class="circle-image" id="nkId">
+                  <img src="static\images\nk.jpg" alt="GHOST DEATZ">
+                </div> 
+            </div>
+        </div>
+        <hr>
+       
+        <div class="songs-list" id="mainDiv" > 
+          <table>
+            <thead>
+              <tr class="center">
+                <th>Album Cover</th>
+                <th>Song Name</th>
+                <th>Genre</th>
+                <th>Duration</th>
+                <th>Favorites</th>
+                <th>Add</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for song in songs %}
+                <tr>
+                  <td><a href="#"><img<td><img src="data:image/jpeg;base64,{{ song.album_cover }}" alt="Album Cover" style="width:100px"></td>
+                    <td>{{ song.song_name }}</td>
+                    <td>{{ song.mood }}</td>
+                    <td >
+                            <audio id="audio_{{ song.id }}" controls>
+                                <source src="data:audio/mpeg;base64,{{ song.song_value }}" type="audio/mp3">
+                                Your browser does not support the audio element.
+                            </audio>  
+                    </td>
+                    <td>
+                      <i id="fav-icon-{{ song.id }}" class="far fa-heart" onclick="addToLikedSongs({{ song.id }})"></i> <!-- Fav icon -->
+                  </td>
+                  
+                  <td> 
+                    <i id="add-to-playlist" class="fas fa-plus" onclick="addToPlaylist({{ song.id }})"></i> <!-- Plus icon -->
+                </td>
+                
+                </tr>
+                {% endfor %}
+          </tbody>
+        </table>
+        </div>
+
+
+        <div class="songs-list" id="ArjitSingh_mainDiv" style="display: none;"> 
+          <p style="font-weight: bold; color: white; font-size: 25px;">Arjit Singh Songs</p>
+          <table>
+            <thead>
+              <tr>
+                  <th>Album Cover</th>
+                  <th>Song Name</th>
+                  <th>Genre</th>
+                  <th>Duration</th>
+                  <th>Favorites</th>
+                  <th>Add</th>
+              </tr>
+          </thead>
+              <tbody>
+                <tr>
+                  <td><img src="static/images/AgarTumSaathHo.jpg" alt="Song 1"></td>
+                  <td>Agar Tum Saath Ho</td>
+                  <td>Sad</td>
+                  <td><audio id="audio-player" controls>
+                    <source src="static\songs\AS\AgarTumSaathHo.mp3" type="audio/mpeg">
+                </audio></td>
+                  <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                  <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+              </tr>
+                  <tr>
+                      <td><img src="static/images/Bandeya.jpg" alt="Song 2"></td>
+                      <td>Bandeya</td>
+                      <td>Motivational</td>
+                      <td><audio id="audio-player" controls>
+                        <source src="static\songs\AS\Bandeya.mp3" type="audio/mpeg">
+                    </audio></td>
+                      <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                      <td> 
+                        <i class="fas fa-plus"></i> <!-- Plus icon -->
+                      </td>
+                  </tr>
+                  <tr>
+                      <td><img src="static/images/Chaleya.jpg" alt="Song 2"></td>
+                      <td>Chaleya</td>
+                      <td>Romantic,Dancing</td>
+                      <td><audio id="audio-player" controls>
+                        <source src="static\songs\AS\Chaleya.mp3" type="audio/mpeg">
+                    </audio></td>
+                      <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                      <td> 
+                        <i class="fas fa-plus"></i> <!-- Plus icon -->
+                      </td>
+                  </tr>
+                  <tr>
+                      <td><img src="static/images/HamariAdhuriKahani.jpg" alt="Song 2"></td>
+                      <td>Hamari Adhuri Kahani</td>
+                      <td>Alone Sad</td>
+                      <td><audio id="audio-player" controls>
+                        <source src="static\songs\AS\HamariAdhuriKahani.mp3" type="audio/mpeg">
+                    </audio></td>
+                      <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                      <td> 
+                        <i class="fas fa-plus"></i> <!-- Plus icon -->
+                      </td>
+                  </tr>
+                  
+              </tbody>
+          </table>
+          </div>
+
+          <div class="songs-list" id="AtifAslam_mainDiv" style="display: none;"> 
+
+            <p style="font-weight: bold; color: white; font-size: 25px;">Atif Aslam Songs</p>
+  
+            <table>
+              <thead>
+                <tr>
+                    <th>Album Cover</th>
+                    <th>Song Name</th>
+                    <th>Genre</th>
+                    <th>Duration</th>
+                    <th>Favorites</th>
+                    <th>Add</th>
+                </tr>
+            </thead>
+                <tbody>
+                  <tr>
+                    <td><img src="static/images/TeraHoneLagaHoon.jpg" alt="Song 1"></td>
+                    <td>Tera Hone Laga Hoon</td>
+                    <td>Happy,Love</td>
+                    <td><audio id="audio-player" controls>
+                      <source src="static\songs\TeraHoneLagaHoon.mp3" type="audio/mpeg">
+                  </audio></td>
+                    <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                    <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+                </tr>
+                <tr>
+                  <td><img src="static/images/BeIntehaan.jpg" alt="Song 1"></td>
+                  <td>Be Intehaan</td>
+                  <td>Love</td>
+                  <td><audio id="audio-player" controls>
+                    <source src="static\songs\BeIntehaan.mp3" type="audio/mpeg">
+                </audio></td>
+                  <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                  <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/TereBin.jpg" alt="Song 1"></td>
+                <td>Tere Bin</td>
+                <td>Sad</td>
+                <td><audio id="audio-player" controls>
+                  <source src="static\songs\TereBin.mp3" type="audio/mpeg">
+              </audio></td>
+                <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+              </tr>
+              <tr>
+              <td><img src="static/images/JeeneLagaHoon.jpg" alt="Song 1"></td>
+              <td>Jeene Laga Hoon</td>
+              <td>Happy,Love</td>
+              <td><audio id="audio-player" controls>
+                <source src="static\songs\JeeneLagaHoon.mp3" type="audio/mpeg">
+                </audio></td>
+                <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+              </tr>
+                    
+                </tbody>
+            </table>
+          </div>
+
+          <div class="songs-list" id="DarshanRaval_mainDiv" style="display: none;"> 
+
+            <p style="font-weight: bold; color: white; font-size: 25px;">Darshan Raval Songs</p>
+  
+            <table>
+              <thead>
+                <tr>
+                    <th>Album Cover</th>
+                    <th>Song Name</th>
+                    <th>Genre</th>
+                    <th>Duration</th>
+                    <th>Favorites</th>
+                    <th>Add</th>
+                </tr>
+            </thead>
+                <tbody>
+                  <tr>
+                    <td><img src="static/images/AsalMein.jpeg" alt="Song 1"></td>
+                    <td>Asal Mein</td>
+                    <td>Happy,Love</td>
+                    <td><audio id="audio-player" controls>
+                      <source src="static\songs\DR\AsalMein.mp3" type="audio/mpeg">
+                  </audio></td>
+                    <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                    <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+                </tr>
+                <tr>
+                  <td><img src="static/images/EkTarfa.jpg" alt="Song 1"></td>
+                  <td>Ek Tarfa</td>
+                  <td>Sad</td>
+                  <td><audio id="audio-player" controls>
+                    <source src="static\songs\DR\EkTarfa.mp3" type="audio/mpeg">
+                </audio></td>
+                  <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                  <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/TeraZikr.jpeg" alt="Song 1"></td>
+                <td>Tera Zikr</td>
+                <td>Lonely</td>
+                <td><audio id="audio-player" controls>
+                  <source src="static\songs\TeraZikr.mp3" type="audio/mpeg">
+              </audio></td>
+                <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+              </tr>
+              <tr>    
+                </tbody>
+            </table>
+          </div>
+
+          <div class="songs-list" id="KishorKumar_mainDiv" style="display: none;"> 
+
+            <p style="font-weight: bold; color: white; font-size: 25px;">Kishor Kumar Songs</p>
+  
+            <table>
+              <thead>
+                <tr>
+                    <th>Album Cover</th>
+                    <th>Song Name</th>
+                    <th>Genre</th>
+                    <th>Duration</th>
+                    <th>Favorites</th>
+                    <th>Add</th>
+                </tr>
+            </thead>
+                <tbody>
+                  <tr>
+                    <td><img src="static/images/MereSapnoKiRani.jpeg" alt="Song 1"></td>
+                    <td>Mere Sapno Ki Rani</td>
+                    <td>Happy,Love</td>
+                    <td><audio id="audio-player" controls>
+                      <source src="static\songs\KK\MereSapnoKiRani.mp3" type="audio/mpeg">
+                  </audio></td>
+                    <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                    <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+                </tr>
+                <tr>
+                  <td><img src="static/images/YehShamMastani.jpeg" alt="Song 1"></td>
+                  <td>Yeh Sham Mastani</td>
+                  <td>Love</td>
+                  <td><audio id="audio-player" controls>
+                    <source src="static\songs\KK\YehShamMastani.mp3" type="audio/mpeg">
+                </audio></td>
+                  <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                  <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/ZindagiEkSafarHaiSuhana.jpeg" alt="Song 1"></td>
+                <td>Zindagi Ek Safar Hai Suhana</td>
+                <td>Happy, Melody</td>
+                <td><audio id="audio-player" controls>
+                  <source src="static\songs\KK\ZindagiEkSafarHaiSuhana.mp3" type="audio/mpeg">
+              </audio></td>
+                <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+              </tr>     
+                </tbody>
+            </table>
+          </div>
+
+          <div class="songs-list" id="SunidhiChauhan_mainDiv" style="display:none">
+            <p style="font-weight: bold; color: white; font-size: 25px;">Sunidhi Chauhan Songs</p>
+            <table>
+              <thead>
+                <tr>
+                    <th>Album Cover</th>
+                    <th>Song Name</th>
+                    <th>Genre</th>
+                    <th>Duration</th>
+                    <th>Favorites</th>
+                    <th>Add</th>
+                </tr>
+            </thead>
+                <tbody>
+                  <tr>
+                    <td><img src="static/images/AajaNachle.jpeg" alt="Song 1"></td>
+                    <td>Aaja Nachle</td>
+                    <td>Dancing</td>
+                    <td><audio id="audio-player" controls>
+                      <source src="static\songs\SC\AajaNachle.mp3" type="audio/mpeg">
+                  </audio></td>
+                    <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                    <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+                </tr>
+                <tr>
+                  <td><img src="static/images/DesiGirl.jpg" alt="Song 1"></td>
+                  <td>Desi Girl</td>
+                  <td>Dancing</td>
+                  <td><audio id="audio-player" controls>
+                    <source src="static\songs\SC\DesiGirl.mp3" type="audio/mpeg">
+                </audio></td>
+                  <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                  <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/Kamli.jpeg" alt="Song 1"></td>
+                <td>Kamli</td>
+                <td>Dancing</td>
+                <td><audio id="audio-player" controls>
+                  <source src="static\songs\SC\Kamli.mp3" type="audio/mpeg">
+              </audio></td>
+                <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+              </tr>     
+                </tbody>
+            </table>
+          </div>
+
+          <div class="songs-list" id="ShreyaGhoshal_mainDiv" style="display:none">
+            <p style="font-weight: bold; color: white; font-size: 25px;">Shreya Ghoshal Songs</p>
+            <table>
+              <thead>
+                <tr>
+                    <th>Album Cover</th>
+                    <th>Song Name</th>
+                    <th>Genre</th>
+                    <th>Duration</th>
+                    <th>Favorites</th>
+                    <th>Add</th>
+                </tr>
+            </thead>
+                <tbody>
+                  <tr>
+                    <td><img src="static/images/ChikniChameli.jpg" alt="Song 1"></td>
+                    <td>Chikni Chameli</td>
+                    <td>Dance, Item</td>
+                    <td><audio id="audio-player" controls>
+                      <source src="static\songs\SG\ChikniChameli.mp3" type="audio/mpeg">
+                  </audio></td>
+                    <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                    <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+                </tr>
+                <tr>
+                  <td><img src="static/images/DeewaniMastani.jpeg" alt="Song 1"></td>
+                  <td>Deewani Mastani</td>
+                  <td>Love</td>
+                  <td><audio id="audio-player" controls>
+                    <source src="static\songs\SG\DeewaniMastani.mp3" type="audio/mpeg">
+                </audio></td>
+                  <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                  <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/TeriOre.jpg" alt="Song 1"></td>
+                <td>Teri Ore</td>
+                <td>Happy, Melody</td>
+                <td><audio id="audio-player" controls>
+                  <source src="static\songs\SG\TeriOre.mp3" type="audio/mpeg">
+              </audio></td>
+                <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+              </tr>     
+                </tbody>
+            </table>
+          </div>
+
+          <div class="songs-list" id="SonuNigam_mainDiv" style="display:none">
+            <p style="font-weight: bold; color: white; font-size: 25px;">Sonu Nigam Songs</p>
+            <table>
+              <thead>
+                <tr>
+                    <th>Album Cover</th>
+                    <th>Song Name</th>
+                    <th>Genre</th>
+                    <th>Duration</th>
+                    <th>Favorites</th>
+                    <th>Add</th>
+                </tr>
+            </thead>
+                <tbody>
+                  <tr>
+                    <td><img src="static/images/AbhiMujhMeinKahi.jpeg" alt="Song 1"></td>
+                    <td>Abhi Mujh Mein Kahi</td>
+                    <td>Sad</td>
+                    <td><audio id="audio-player" controls>
+                      <source src="static\songs\SN\AbhiMujhMeinKahi.mp3" type="audio/mpeg">
+                  </audio></td>
+                    <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                    <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+                </tr>
+                <tr>
+                  <td><img src="static/images/KalHoNaaHo.jpg" alt="Song 1"></td>
+                  <td>Kal Ho Naa Ho</td>
+                  <td>Love</td>
+                  <td><audio id="audio-player" controls>
+                    <source src="static\songs\SN\KalHoNaaHo.mp3" type="audio/mpeg">
+                </audio></td>
+                  <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                  <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+              </tr>
+              <tr>
+                <td><img src="static/images/Soniyo.jpeg" alt="Song 1"></td>
+                <td>Soniyo</td>
+                <td>Happy, Love</td>
+                <td><audio id="audio-player" controls>
+                  <source src="static\songs\SN\Soniyo.mp3" type="audio/mpeg">
+              </audio></td>
+                <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+              </tr>     
+              <tr>
+                <td><img src="static/images/SurajHuaMaddham.jpeg" alt="Song 1"></td>
+                <td>Suraj Hua Maddham</td>
+                <td>Romantic, Love</td>
+                <td><audio id="audio-player" controls>
+                  <source src="static\songs\SN\SurajHuaMaddham.mp3" type="audio/mpeg">
+              </audio></td>
+                <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+              </tr> 
+                </tbody>
+            </table>
+          </div>
+
+          <div class="songs-list" id="KrishnakumarKunnath_mainDiv" style="display:none">
+            <p style="font-weight: bold; color: white; font-size: 25px;">Krishnakumar Kunnath Songs</p>
+            <table>
+              <thead>
+                <tr>
+                    <th>Album Cover</th>
+                    <th>Song Name</th>
+                    <th>Genre</th>
+                    <th>Duration</th>
+                    <th>Favorites</th>
+                    <th>Add</th>
+                </tr>
+            </thead>
+                <tbody>
+            <tr>
+              <td><img src="static/images/AankhonMeinTeriAjabSi.jpg" alt="Song 1"></td>
+              <td>Aankhon Mein Teri Ajab Si</td>
+              <td>Romantic, Love</td>
+              <td><audio id="audio-player" controls>
+                <source src="static\songs\KiK\AankhonMeinTeriAjabSi.mp3" type="audio/mpeg">
+            </audio></td>
+              <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+              <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+            </tr> 
+            <tr>
+              <td><img src="static/images/KhudaJaane.jpeg" alt="Song 1"></td>
+              <td>Khuda Jaane</td>
+              <td>Happy, Love</td>
+              <td><audio id="audio-player" controls>
+                <source src="static\songs\KiK\KhudaJaane.mp3" type="audio/mpeg">
+            </audio></td>
+              <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+              <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+            </tr> 
+            <tr>
+              <td><img src="static/images/Alvida.jpg" alt="Song 1"></td>
+              <td>Alvida</td>
+              <td>Sad</td>
+              <td><audio id="audio-player" controls>
+                <source src="static\songs\KiK\Alvida.mp3" type="audio/mpeg">
+            </audio></td>
+              <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+              <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+            </tr> 
+          </tbody>
+        </table>
+          </div>
+
+          <div class="songs-list" id="NehaKakkar_mainDiv" style="display:none">
+            <p style="font-weight: bold; color: white; font-size: 25px;">Neha Kakkar Songs</p>
+            <table>
+              <thead>
+                <tr>
+                    <th>Album Cover</th>
+                    <th>Song Name</th>
+                    <th>Genre</th>
+                    <th>Duration</th>
+                    <th>Favorites</th>
+                    <th>Add</th>
+                </tr>
+              </thead>
+            <tbody>
+              <tr>
+                <td><img src="static/images/AankhMarey.jpeg" alt="Song 1"></td>
+                <td>Aankh Marey</td>
+                <td>Happy, Dancing</td>
+                <td><audio id="audio-player" controls>
+                  <source src="static\songs\NK\AankhMarey.mp3" type="audio/mpeg">
+              </audio></td>
+                <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+              </tr> 
+              <tr>
+                <td><img src="static/images/Dilbar.jpeg" alt="Song 1"></td>
+                <td>Dilbar</td>
+                <td>Dancing,Love</td>
+                <td><audio id="audio-player" controls>
+                  <source src="static\songs\NK\DILBAR.mp3" type="audio/mpeg">
+              </audio></td>
+                <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+              </tr> 
+              <tr>
+                <td><img src="static/images/MileHoTum.jpg" alt="Song 1"></td>
+                <td>Mile Ho Tum</td>
+                <td>Romantic</td>
+                <td><audio id="audio-player" controls>
+                  <source src="static\songs\NK\MileHoTum.mp3" type="audio/mpeg">
+              </audio></td>
+                <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+              </tr> 
+          </tbody>
+        </table>
+        </div>
+      </div>
+        </div>
+        
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Add this to your index.html file -->
+
+<script>
+  // Function to perform search
+  function searchSongs() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("searchInput");
+      filter = input.value.toUpperCase();
+      table = document.querySelector(".songs-list table");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[1]; // Index 1 corresponds to Song Name column
+          if (td) {
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+              } else {
+                  tr[i].style.display = "none";
+              }
+          }
+      }
+  }
+
+  // Attach event listener to the search input
+  document.getElementById("searchInput").addEventListener("keyup", searchSongs);
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      const asId = document.getElementById("asId");
+      const aaId = document.getElementById("aaId");
+      const drId = document.getElementById("drId");
+      const KKId = document.getElementById("KKId");
+      const scId = document.getElementById("scId");
+      const sgId = document.getElementById("sgId");
+      const snId = document.getElementById("snId");
+      const KiKId = document.getElementById("KiKId");
+      const nkId = document.getElementById("nkId");
+      const mainDiv = document.getElementById("mainDiv");
+      const arjitSinghMainDiv = document.getElementById("ArjitSingh_mainDiv");
+      const atifAslamMainDiv = document.getElementById("AtifAslam_mainDiv");
+      const darshanRavalMainDiv = document.getElementById("DarshanRaval_mainDiv");
+      const kishorKumarMainDiv = document.getElementById("KishorKumar_mainDiv");
+      const sunidhiChauhanMainDiv = document.getElementById("SunidhiChauhan_mainDiv");
+      const shreyaGhoshalMainDiv = document.getElementById("ShreyaGhoshal_mainDiv");
+      const sonuNigamMainDiv = document.getElementById("SonuNigam_mainDiv");
+      const krishnakumarKunnathMainDiv = document.getElementById("KrishnakumarKunnath_mainDiv");
+      const nehaKakkarMainDiv = document.getElementById("NehaKakkar_mainDiv");
+
+      asId.addEventListener("click", function() {
+          mainDiv.style.display = "none";
+          arjitSinghMainDiv.style.display = "block";
+          atifAslamMainDiv.style.display = "none";
+          darshanRavalMainDiv.style.display = "none";
+          kishorKumarMainDiv.style.display = "none";
+          sunidhiChauhanMainDiv.style.display = "none";
+          shreyaGhoshalMainDiv.style.display = "none";
+          sonuNigamMainDiv.style.display = "none";
+          krishnakumarKunnathMainDiv.style.display = "none";
+          nehaKakkarMainDiv.style.display = "none"
+      });
+      aaId.addEventListener("click", function() {
+        mainDiv.style.display = "none";
+        arjitSinghMainDiv.style.display = "none";
+        atifAslamMainDiv.style.display = "block";
+        darshanRavalMainDiv.style.display = "none";
+        kishorKumarMainDiv.style.display = "none";
+        sunidhiChauhanMainDiv.style.display = "none";
+        shreyaGhoshalMainDiv.style.display = "none";
+        sonuNigamMainDiv.style.display = "none";
+        krishnakumarKunnathMainDiv.style.display = "none";
+        nehaKakkarMainDiv.style.display = "none"
+      });
+      drId.addEventListener("click", function() {
+        mainDiv.style.display = "none";
+          arjitSinghMainDiv.style.display = "none";
+          atifAslamMainDiv.style.display = "none";
+          darshanRavalMainDiv.style.display = "block";
+          kishorKumarMainDiv.style.display = "none";
+          sunidhiChauhanMainDiv.style.display = "none";
+          shreyaGhoshalMainDiv.style.display = "none";
+          sonuNigamMainDiv.style.display = "none";
+          krishnakumarKunnathMainDiv.style.display = "none";
+          nehaKakkarMainDiv.style.display = "none"
+
+      });
+      KKId.addEventListener("click", function() {
+        mainDiv.style.display = "none";
+          arjitSinghMainDiv.style.display = "none";
+          atifAslamMainDiv.style.display = "none";
+          darshanRavalMainDiv.style.display = "none";
+          kishorKumarMainDiv.style.display = "block";
+          sunidhiChauhanMainDiv.style.display = "none";
+          shreyaGhoshalMainDiv.style.display = "none";
+          sonuNigamMainDiv.style.display = "none";
+          krishnakumarKunnathMainDiv.style.display = "none";
+          nehaKakkarMainDiv.style.display = "none"
+      });
+      scId.addEventListener("click", function() {
+        mainDiv.style.display = "none";
+          arjitSinghMainDiv.style.display = "none";
+          atifAslamMainDiv.style.display = "none";
+          darshanRavalMainDiv.style.display = "none";
+          kishorKumarMainDiv.style.display = "none";
+          sunidhiChauhanMainDiv.style.display = "block";
+          shreyaGhoshalMainDiv.style.display = "none";
+          sonuNigamMainDiv.style.display = "none";
+          krishnakumarKunnathMainDiv.style.display = "none";
+          nehaKakkarMainDiv.style.display = "none"
+      });
+      sgId.addEventListener("click", function() {
+        mainDiv.style.display = "none";
+          arjitSinghMainDiv.style.display = "none";
+          atifAslamMainDiv.style.display = "none";
+          darshanRavalMainDiv.style.display = "none";
+          kishorKumarMainDiv.style.display = "none";
+          sunidhiChauhanMainDiv.style.display = "none";
+          shreyaGhoshalMainDiv.style.display = "block";
+          sonuNigamMainDiv.style.display = "none";
+          krishnakumarKunnathMainDiv.style.display = "none";
+          nehaKakkarMainDiv.style.display = "none"
+      });
+      snId.addEventListener("click", function() {
+        mainDiv.style.display = "none";
+          arjitSinghMainDiv.style.display = "none";
+          atifAslamMainDiv.style.display = "none";
+          darshanRavalMainDiv.style.display = "none";
+          kishorKumarMainDiv.style.display = "none";
+          sunidhiChauhanMainDiv.style.display = "none";
+          shreyaGhoshalMainDiv.style.display = "none";
+          sonuNigamMainDiv.style.display = "block";
+          krishnakumarKunnathMainDiv.style.display = "none";
+          nehaKakkarMainDiv.style.display = "none"
+      });
+      KiKId.addEventListener("click", function() {
+        mainDiv.style.display = "none";
+          arjitSinghMainDiv.style.display = "none";
+          atifAslamMainDiv.style.display = "none";
+          darshanRavalMainDiv.style.display = "none";
+          kishorKumarMainDiv.style.display = "none";
+          sunidhiChauhanMainDiv.style.display = "none";
+          shreyaGhoshalMainDiv.style.display = "none";
+          sonuNigamMainDiv.style.display = "none";
+          krishnakumarKunnathMainDiv.style.display = "block";
+          nehaKakkarMainDiv.style.display = "none"
+      });
+      nkId.addEventListener("click", function() {
+        mainDiv.style.display = "none";
+          arjitSinghMainDiv.style.display = "none";
+          atifAslamMainDiv.style.display = "none";
+          darshanRavalMainDiv.style.display = "none";
+          kishorKumarMainDiv.style.display = "none";
+          sunidhiChauhanMainDiv.style.display = "none";
+          shreyaGhoshalMainDiv.style.display = "none";
+          sonuNigamMainDiv.style.display = "none";
+          krishnakumarKunnathMainDiv.style.display = "none";
+          nehaKakkarMainDiv.style.display = "block"
+      });
+  });
+</script>
+
+<script>
+  var currentAudio = null;
+
+  // Function to pause the other audio elements when a new one starts playing
+  function pauseOtherAudios(currentAudioElement) {
+      console.log("pauseOtherAudios function called"); // Log a message to indicate that the function is called
+  
+      var allAudios = document.querySelectorAll('audio');
+      allAudios.forEach(function(audio) {
+          if (audio !== currentAudioElement && !audio.paused) {
+              audio.pause();
+          }
+      });
+  }
+  
+  // Add event listeners to each audio element
+  {% for song in songs %}
+  var audio{{ song.id }} = document.getElementById('audio_{{ song.id }}');
+  audio{{ song.id }}.addEventListener('play', function() {
+      console.log("Audio play event triggered"); // Log a message when the play event is triggered
+      pauseOtherAudios(this);
+      currentAudio = this;
+  });
+  {% endfor %}
+
+</script>
+<script>
+  function addToLikedSongs(songId) {
+    // AJAX request to fetch data from the Song table
+    $.ajax({
+        type: "GET", // Use GET method to fetch data
+        url: "/fetch_song", // Endpoint to fetch data from the Song table
+        data: { songId: songId }, // Send the song ID to identify the song
+        success: function(response) {
+            // Handle the response data
+            console.log("Response:", response);
+            if (response.success) {
+                // Toggle the heart icon color
+                var favIcon = document.getElementById('fav-icon-' + songId);
+                if (favIcon.classList.contains('liked')) {
+                    // If the icon is already liked, remove the 'liked' class to change the color back to white
+                    favIcon.classList.remove('liked');
+                    alert("Song removed from liked songs.");
+                } else {
+                    // If the icon is not liked, add the 'liked' class to change the color to red
+                    favIcon.classList.add('liked');
+                    alert("Song added to liked songs.");
+                }
+            } else {
+                console.error("Error adding song to LikedSong table:", response.error);
+            }
+        },
+        error: function(error) {
+            console.error("Error fetching song data:", error);
+        }
+    });
+}
+
+  function addToPlaylist(songId) {
+    // AJAX request to fetch song details from the server
+    $.ajax({
+        type: "GET",
+        url: "/fetch_song_details",
+        data: { songId: songId },
+        success: function(response) {
+            if (response.success) {
+                // Call a function to add the song details to the playlist
+                addSongToPlaylist(response.songDetails);
+            } else {
+                console.error("Error fetching song details:", response.error);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Error fetching song details:", xhr.responseText);
+        }
+    });
+}
+
+function addSongToPlaylist(songDetails) {
+    // AJAX request to add the song details to the Playlist table
+    $.ajax({
+        type: "POST",
+        url: "/add_to_playlist",
+        contentType: "application/json",
+        data: JSON.stringify(songDetails),
+        success: function(response) {
+            if (response.success) {
+                console.log("Song added to Playlist successfully.");
+            } else {
+                console.error("Error adding song to Playlist:", response.error);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Error adding song to Playlist:", xhr.responseText);
+        }
+    });
+}
+
+
+</script>
+</body>
+
+</html>

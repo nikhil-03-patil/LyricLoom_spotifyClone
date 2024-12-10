@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ProfilePage</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='account.css') }}">
+    <!-- <link rel="stylesheet" href="/static/style.css"> -->
+
+  </head>
+  <body>
+    <div class="sidebar">
+      <!-- <div class="logo">
+        <a href="#">
+          <img src="https://img.pikbest.com/origin/10/04/52/29ApIkbEsTUZi.png!w700wp" alt="Logo" />
+        </a>
+      </div> -->
+
+      <div class="navigation">
+        <ul>
+          <!--<li>
+            <a href="#">
+              <span class="fa fa-home"></span>
+              <span>Home</span>
+            </a>
+          </li>-->
+
+          {% comment %} <li>
+           <!-- <i class="fa-thin fa-magnifying-glass"></i> -->
+            <input type="text" class="search-hover" name="search" placeholder="search here..." />
+
+          </li> {% endcomment %}
+
+          <!-- <li>
+            <a href="{{ url_for('hello')}}">
+              <span class="fa fas fa-book"></span>
+              <span>Your Library</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="navigation">
+        <ul>
+          <li>
+            <a href="{{ url_for('getacc') }}"> 
+              <span class="fa fas fa-user"></span>
+              <span>My Profile</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="fa fas fa-plus-square"></span>
+              <span>Create Playlist</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="fa fas fa-heart"></span>
+              <span>Liked Songs</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="policies">
+        <ul>
+          <li>
+            <a href="#">Cookies</a>
+          </li>
+          <li>
+            <a href="#">Privacy</a>
+          </li>
+        </ul>
+      </div>
+    </div> -->
+
+<div class="container">
+  <h1>User Profile</h1>
+  <hr>
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-3">
+      <div class="text-center">
+        <img src="/static/User_Circle.png" class="avatar img-circle" alt="avatar">
+        <!-- <h6>Upload a different photo...</h6> -->
+        
+        <!-- <input type="file" class="form-control"> -->
+      </div>
+    </div>
+    
+    <!-- edit form column -->
+     <div class="col-md-9 personal-info">
+       <!-- <div class="alert alert-info alert-dismissable">
+        <a class="panel-close close" data-dismiss="alert">×</a> 
+        <i class="fa fa-coffee"></i>
+         This is an <strong>.alert</strong>. Use this to show important messages to the user.
+       </div>  -->
+      <h3>Personal info</h3>
+      
+      <form class="form-horizontal" role="form">
+        <div class="form-group">
+          <label class="col-lg-3 control-label">First name:</label>
+          <div class="col-lg-8">
+            <input class="form-control" type="text" value="{{fn}}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Last name:</label>
+          <div class="col-lg-8">
+            <input class="form-control" type="password" value="ln">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">uname:</label>
+          <div class="col-lg-8">
+            <input class="form-control" type="text" value="">
+          </div>
+        </div>
+        <!-- <div class="form-group">
+          <label class="col-lg-3 control-label">Time Zone:</label>
+          <div class="col-lg-8">
+            <div class="ui-select">
+              <select id="user_time_zone" class="form-control">
+                <option value="Hawaii">(GMT-10:00) Hawaii</option>
+                <option value="Alaska">(GMT-09:00) Alaska</option>
+                <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
+                <option value="Arizona">(GMT-07:00) Arizona</option>
+                <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
+                <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
+                <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
+                <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
+              </select>
+            </div>
+          </div>
+        </div> -->
+        <!-- <div class="form-group">
+          <label class="col-md-3 control-label">Username:</label>
+          <div class="col-md-8">
+            <input class="form-control" type="text" value="janeuser">
+          </div>
+        </div> -->
+        <!-- <div class="form-group">
+          <label class="col-md-3 control-label">Password:</label>
+          <div class="col-md-8">
+            <input class="form-control" type="password" value="11111122333">
+          </div>
+        </div> -->
+        <!-- <div class="form-group">
+          <label class="col-md-3 control-label">Confirm password:</label>
+          <div class="col-md-8">
+            <input class="form-control" type="password" value="11111122333">
+          </div>
+        </div> -->
+        <!-- <div class="form-group">
+          <label class="col-md-3 control-label"></label>
+          <div class="col-md-8">
+            <input type="button" class="btn btn-primary" value="Save Changes">
+            <span></span>
+            <input type="reset" class="btn btn-default" value="Cancel">
+          </div>
+        </div> -->
+      </form>
+    </div>
+</div>
+</div>
+<hr>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='songs.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark" bg-body-tertiary>
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <img src="static/images/logo1.png" height="45px">
+            </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/index.html">LyricLoom</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/playlist">Playlist</a>
+          </li>
+          <li class="nav-item">
+            <a  class="nav-link" href="/mymedia">My Media</a>
+          </li>
+          <li class="nav-item">
+            <a  class="nav-link" href="/account">My Profile</a>
+          </li>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                {% if email %}
+                <p class="nav-link" style="font-size: 16px; font-weight: bold; color: white;">Email: {{ email }}</p>
+                {% endif %}
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Logout</a>
+            </li>
+          </ul>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <div class="wrapper">
+        <div class="main p-3">
+          <div class="-bar">
+            <div class="row">
+              <div class="col-4"></div>
+              <div class="col-4">
+               
+                <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+              </div>
+              <div class="col-4"></dv>
+  
+            </div>
+            
+        </div> 
+          <br>
+        <div class="artist">
+              <h4 style="color:white ; padding-left:20px">  Popular Artist</h4>
+              <div class="list">
+                <div class="circle-image" id="asId">
+                  <img src="static/images/happy.jpg"/>
+                </div>
+                <div class="circle-image" id="aaId">
+                  <img src="static/images/sad.jpg"/>
+                </div>
+                <div class="circle-image" id="drId">
+                  <img src="static\images\DR.jpg" alt="GHOST DEATZ">
+                </div>
+                <div class="circle-image" id="KKId">
+                  <img src="static\images\KK.jpg" alt="GHOST DEATZ">
+                </div>
+                <div class="circle-image" id="scId">
+                  <img src="static\images\sc.jpg" alt="GHOST DEATZ">
+                </div>
+                <div class="circle-image" id="sgId">
+                  <img src="static\images\sg.jpg" alt="GHOST DEATZ">
+                </div>
+                <div class="circle-image" id="snId">
+                  <img src="static\images\sn.jpg" alt="GHOST DEATZ">
+                </div>
+                <div class="circle-image" id="KiKId">
+                  <img src="static\images\K-K.jpg" alt="GHOST DEATZ">
+                </div> 
+                <div class="circle-image" id="nkId">
+                  <img src="static\images\nk.jpg" alt="GHOST DEATZ">
+                </div> 
+            </div>
+        </div>
+        <hr>
+       
+        
+        <div class="songs-list" id="ArjitSingh_mainDiv" style="display: none;"> 
+          <p style="font-weight: bold; color: white; font-size: 25px;">Arjit Singh Songs</p>
+          <table>
+            <thead>
+              <tr>
+                  <th>Album Cover</th>
+                  <th>Song Name</th>
+                  <th>Genre</th>
+                  <th>Duration</th>
+                  <th>Favorites</th>
+                  <th>Add</th>
+              </tr>
+          </thead>
+              <tbody>
+                <tr>
+                  <td><img src="static/images/AgarTumSaathHo.jpg" alt="Song 1"></td>
+                  <td>Agar Tum Saath Ho</td>
+                  <td>Sad</td>
+                  <td><audio id="audio-player happyID" controls>
+                    <input class="form-control" type="hidden" value="Happy" id="moodTyp_happy">
+                    <source src="static\songs\AS\AgarTumSaathHo.mp3" type="audio/mpeg">
+                </audio></td>
+                  <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                  <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+              </tr>
+                  <tr>
+                      <td><img src="static/images/Bandeya.jpg" alt="Song 2"></td>
+                      <td>Bandeya</td>
+                      <td>Motivational</td>
+                      <td><audio id="audio-player" controls>
+                        <source src="static\songs\AS\Bandeya.mp3" type="audio/mpeg">
+                    </audio></td>
+                      <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                      <td> 
+                        <i class="fas fa-plus"></i> <!-- Plus icon -->
+                      </td>
+                  </tr>
+                  <tr>
+                      <td><img src="static/images/Chaleya.jpg" alt="Song 2"></td>
+                      <td>Chaleya</td>
+                      <td>Romantic,Dancing</td>
+                      <td><audio id="audio-player" controls>
+                        <source src="static\songs\AS\Chaleya.mp3" type="audio/mpeg">
+                    </audio></td>
+                      <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                      <td> 
+                        <i class="fas fa-plus"></i> <!-- Plus icon -->
+                      </td>
+                  </tr>
+                  <tr>
+                      <td><img src="static/images/HamariAdhuriKahani.jpg" alt="Song 2"></td>
+                      <td>Hamari Adhuri Kahani</td>
+                      <td>Alone Sad</td>
+                      <td><audio id="audio-player" controls>
+                        <source src="static\songs\AS\HamariAdhuriKahani.mp3" type="audio/mpeg">
+                    </audio></td>
+                      <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                      <td> 
+                        <i class="fas fa-plus"></i> <!-- Plus icon -->
+                      </td>
+                  </tr>
+                  
+              </tbody>
+          </table>
+          </div>
+
+          
+        
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <!-- Add this to your index.html file -->
+
+<script>
+  $(document).ready(function () {
+      $('.album-link').click(function (event) {
+          event.preventDefault();
+          var songId = $(this).data('song-id');
+          $.getJSON('/play_song/' + songId, function (data) {
+              $('#album-cover').attr('src', data.album_cover_url);
+              $('#audio-player source').attr('src', data.audio_url);
+              $('#song-name').text(data.song_name);
+              $('#audio-player')[0].load();
+              $('#audio-player')[0].play();
+              $('#bottom-panel').show();
+          });
+      });
+  });
+</script>
+<script>
+  $(document).ready(function () {
+      $('.play-btn').click(function () {
+          var audio = $('#audio-player')[0];
+          var playButton = $(this);
+          
+          if (audio.paused) {
+              audio.play();
+              playButton.text('PAUSE');
+          } else {
+              audio.pause();
+              playButton.text('PLAY');
+          }
+      });
+  });
+</script>
+
+
+<script>
+  // Function to perform search
+  function searchSongs() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("searchInput");
+      filter = input.value.toUpperCase();
+      table = document.querySelector(".songs-list table");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[1]; // Index 1 corresponds to Song Name column
+          if (td) {
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+              } else {
+                  tr[i].style.display = "none";
+              }
+          }
+      }
+  }
+
+  // Attach event listener to the search input
+  document.getElementById("searchInput").addEventListener("keyup", searchSongs);
+</script>
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      const happyID = document.getElementById("happyID");
+      const aaId = document.getElementById("aaId");
+      const drId = document.getElementById("drId");
+      const KKId = document.getElementById("KKId");
+      const scId = document.getElementById("scId");
+      const sgId = document.getElementById("sgId");
+      const snId = document.getElementById("snId");
+      const KiKId = document.getElementById("KiKId");
+      const nkId = document.getElementById("nkId");
+    //  const mainDiv = document.getElementById("mainDiv");
+      const arjitSinghMainDiv = document.getElementById("ArjitSingh_mainDiv");
+      const atifAslamMainDiv = document.getElementById("AtifAslam_mainDiv");
+      const darshanRavalMainDiv = document.getElementById("DarshanRaval_mainDiv");
+      const kishorKumarMainDiv = document.getElementById("KishorKumar_mainDiv");
+      const sunidhiChauhanMainDiv = document.getElementById("SunidhiChauhan_mainDiv");
+      const shreyaGhoshalMainDiv = document.getElementById("ShreyaGhoshal_mainDiv");
+      const sonuNigamMainDiv = document.getElementById("SonuNigam_mainDiv");
+      const krishnakumarKunnathMainDiv = document.getElementById("KrishnakumarKunnath_mainDiv");
+      const nehaKakkarMainDiv = document.getElementById("NehaKakkar_mainDiv");
+
+      happyID.addEventListener("click", function() {
+        
+          arjitSinghMainDiv.style.display = "block";
+          atifAslamMainDiv.style.display = "none";
+          darshanRavalMainDiv.style.display = "none";
+          kishorKumarMainDiv.style.display = "none";
+          sunidhiChauhanMainDiv.style.display = "none";
+          shreyaGhoshalMainDiv.style.display = "none";
+          sonuNigamMainDiv.style.display = "none";
+          krishnakumarKunnathMainDiv.style.display = "none";
+          nehaKakkarMainDiv.style.display = "none"
+      });
+     
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+      $("#happyID").click(function() {
+          // Getting the mood_type from the hidden input field
+          var mood_type = $("#moodTyp_happy").val();
+          
+          // Getting the user_name from the template variable
+          var user_name = "{{ user_info.email }}";
+          
+         // alert('You have clicked on Happy' + '--' + user_name + '--' + mood_type);
+          
+          // AJAX call to update_mood endpoint in app.py
+          $.ajax({
+              type: "POST",
+              url: "/update_mood",
+              data: {
+                  user_name: user_name,
+                  mood_type: mood_type
+              },
+              success: function(response) {
+                  console.log("Mood updated successfully");
+                  // Optionally, do something with the response if needed
+              },
+              error: function(error) {
+                  console.error("Error updating mood:", error);
+              }
+          });
+      });
+  });
+</script>
+
+<script>
+$(document).ready(function() {
+    $("#sadID").click(function() {
+        // Getting the mood_type from the hidden input field
+        var mood_type = $("#moodTyp_sad").val();
+        
+        // Getting the user_name from the template variable
+        var user_name = "{{ user_info.email }}";
+        
+       // alert('You have clicked on Happy' + '--' + user_name + '--' + mood_type);
+        
+        // AJAX call to update_mood endpoint in app.py
+        $.ajax({
+            type: "POST",
+            url: "/update_mood",
+            data: {
+                user_name: user_name,
+                mood_type: mood_type
+            },
+            success: function(response) {
+                console.log("Mood updated successfully");
+                // Optionally, do something with the response if needed
+            },
+            error: function(error) {
+                console.error("Error updating mood:", error);
+            }
+        });
+    });
+});
+</script>
+<script>
+$(document).ready(function() {
+  $("#romanticID").click(function() {
+      // Getting the mood_type from the hidden input field
+      var mood_type = $("#moodTyp_romantic").val();
+      
+      // Getting the user_name from the template variable
+      var user_name = "{{ user_info.email }}";
+      
+     // alert('You have clicked on Happy' + '--' + user_name + '--' + mood_type);
+      
+      // AJAX call to update_mood endpoint in app.py
+      $.ajax({
+          type: "POST",
+          url: "/update_mood",
+          data: {
+              user_name: user_name,
+              mood_type: mood_type
+          },
+          success: function(response) {
+              console.log("Mood updated successfully");
+              // Optionally, do something with the response if needed
+          },
+          error: function(error) {
+              console.error("Error updating mood:", error);
+          }
+      });
+  });
+});
+</script>
+<script>
+$(document).ready(function() {
+  $("#dancingID").click(function() {
+      // Getting the mood_type from the hidden input field
+      var mood_type = $("#moodTyp_dancing").val();
+      
+      // Getting the user_name from the template variable
+      var user_name = "{{ user_info.email }}";
+      
+     // alert('You have clicked on Happy' + '--' + user_name + '--' + mood_type);
+      
+      // AJAX call to update_mood endpoint in app.py
+      $.ajax({
+          type: "POST",
+          url: "/update_mood",
+          data: {
+              user_name: user_name,
+              mood_type: mood_type
+          },
+          success: function(response) {
+              console.log("Mood updated successfully");
+              // Optionally, do something with the response if needed
+          },
+          error: function(error) {
+              console.error("Error updating mood:", error);
+          }
+      });
+  });
+});
+</script>
+<script>
+$(document).ready(function() {
+  $("#lofiID").click(function() {
+      // Getting the mood_type from the hidden input field
+      var mood_type = $("#moodTyp_lofi").val();
+      
+      // Getting the user_name from the template variable
+      var user_name = "{{ user_info.email }}";
+      
+     // alert('You have clicked on Happy' + '--' + user_name + '--' + mood_type);
+      
+      // AJAX call to update_mood endpoint in app.py
+      $.ajax({
+          type: "POST",
+          url: "/update_mood",
+          data: {
+              user_name: user_name,
+              mood_type: mood_type
+          },
+          success: function(response) {
+              console.log("Mood updated successfully");
+              // Optionally, do something with the response if needed
+          },
+          error: function(error) {
+              console.error("Error updating mood:", error);
+          }
+      });
+  });
+});
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+</body>
+
+</html>

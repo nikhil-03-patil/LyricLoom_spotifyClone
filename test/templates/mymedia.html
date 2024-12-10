@@ -1,0 +1,225 @@
+<html>
+<head>
+    <title>My Media Page</title>
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='mymedia.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='songs.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark" bg-body-tertiary>
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <img src="static/images/logo1.png" height="45px">
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/index">LyricLoom</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/playlist">Playlist</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/account">My Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="main p-3">
+        <div class="list">
+            <div class="spotify-playlists">
+              <div class="list">
+                <div class="item" id="liked-songs" onclick="fetchLikedSongs()">
+                  <img src="static/images/liked1.png"/>
+                  <h4>Liked Songs</h4>
+                </div>
+                <br>
+                <div class="item" id="playlist" >
+                  <img src="static/images/playlist.png"/>
+                  <a>Playlist</h4>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="songs-list" id="mainDiv" > 
+            <table>
+              <thead>
+                <tr>
+                    <th>Album Cover</th>
+                    <th>Song Name</th>
+                    <th>Genre</th>
+                    <th>Duration</th>
+                    <th>Favorites</th>
+                    <th>Add</th>
+                </tr>
+            </thead>
+            <tbody id="songTableBody">
+              {% for song in songs %}
+                  <tr>
+                    <td><a href="#"><img<td><img src="data:image/jpeg;base64,{{ song.album_cover }}" alt="Album Cover" style="width:100px"></td>
+                      <td>{{ song.song_name }}</td>
+                      <td>{{ song.mood }}</td>
+                      <td>
+                        <div>
+                          <button onclick="playAudio('{{ song.id }}')">Play</button>
+                          <audio id="audio_{{ song.id }}" controls style="display: none;">
+                              <source src="data:audio/mpeg;base64,{{ song.song_value }}" type="audio/mp3">
+                              Your browser does not support the audio element.
+                          </audio>
+                      </div>
+                      </td>
+                      <td><i id="fav-icon" class="far fa-heart"></i> <!-- Fav icon --></td>
+                      <td> <i id="add-to-playlist" class="fas fa-plus"></i> <!-- Plus icon --></td>
+                  </tr>
+                  {% endfor %}
+            </tbody>
+          </table>
+          </div>
+          <hr>
+        </div> 
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    let renderedSongNames = new Set();
+
+    function fetchLikedSongs() {
+        $.ajax({
+            type: "GET",
+            url: "/fetch_liked_songs",
+            success: function(response) {
+                // Handle the response data and update the HTML to display liked songs
+                renderLikedSongs(response);
+            },
+            error: function(error) {
+                console.error("Error fetching liked songs:", error);
+            }
+        });
+    }
+    
+    function renderLikedSongs(songs) {
+        var tableBody = document.getElementById('songTableBody');
+        tableBody.innerHTML = '';
+    
+        songs.forEach(function(song) {
+            // Check if the song name is already in the renderedSongNames set
+            if (!renderedSongNames.has(song.song_name)) {
+                var row = document.createElement('tr');
+    
+                // Create table cells for each song attribute
+                var albumCoverCell = document.createElement('td');
+                var albumCoverImg = document.createElement('img');
+                albumCoverImg.src = 'data:image/jpeg;base64,' + song.album_cover;
+                albumCoverImg.alt = 'Album Cover';
+                albumCoverImg.style.width = '100px';
+                albumCoverCell.appendChild(albumCoverImg);
+                row.appendChild(albumCoverCell);
+    
+                var songNameCell = document.createElement('td');
+                songNameCell.textContent = song.song_name;
+                row.appendChild(songNameCell);
+    
+                var genreCell = document.createElement('td');
+                genreCell.textContent = song.mood;
+                row.appendChild(genreCell);
+    
+                var audioCell = document.createElement('td');
+                var audioElement = document.createElement('audio');
+                audioElement.controls = true;
+                var sourceElement = document.createElement('source');
+                sourceElement.src = 'data:audio/mpeg;base64,' + song.song_value;
+                sourceElement.type = 'audio/mp3';
+                audioElement.appendChild(sourceElement);
+                audioCell.appendChild(audioElement);
+                row.appendChild(audioCell);
+    
+                var favoritesCell = document.createElement('td');
+                var favoritesIcon = document.createElement('i');
+                favoritesIcon.className = 'far fa-heart red'; // Add 'red' class to make the icon red by default
+                favoritesCell.appendChild(favoritesIcon);
+                row.appendChild(favoritesCell);
+    
+                var addToPlaylistCell = document.createElement('td');
+                var addToPlaylistIcon = document.createElement('i');
+                addToPlaylistIcon.className = 'fas fa-plus';
+                addToPlaylistCell.appendChild(addToPlaylistIcon);
+                row.appendChild(addToPlaylistCell);
+    
+                // Append the row to the table body
+                tableBody.appendChild(row);
+    
+                // Add event listener for playing and pausing the song
+                audioElement.addEventListener('play', function() {
+                    pauseOtherSongs(audioElement);
+                });
+                audioElement.addEventListener('pause', function() {
+                    // No action needed on pause
+                });
+    
+                // Add event listener for clicking on the favorite icon
+                favoritesIcon.addEventListener('click', function() {
+                    removeFromLikedSongs(song);
+                });
+    
+                // Add the song name to the renderedSongNames set
+                renderedSongNames.add(song.song_name);
+            }
+        });
+    }
+    
+    function removeFromLikedSongs(song) {
+        // AJAX request to remove the song from the liked songs
+        $.ajax({
+            type: "POST",
+            url: "/remove_from_liked_songs",
+            contentType: "application/json", // Set content type to JSON
+            data: JSON.stringify({ songName: song.song_name }), // Send the song name as JSON data
+            success: function(response) {
+                // Handle the response data
+                console.log("Response:", response);
+                if (response.success) {
+                    // Remove the song row from the table
+                    var row = document.getElementById('song_' + song.id);
+                    row.remove();
+                    console.log("Song removed from LikedSongs table successfully.");
+                } else {
+                    console.error("Error removing song from LikedSongs table:", response.error);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("Error removing song:", xhr.responseText); // Log the detailed error message
+            }
+        });
+    }
+    
+    
+    
+    // Function to pause other songs when a new song is played
+    function pauseOtherSongs(currentAudioElement) {
+        var audioElements = document.getElementsByTagName('audio');
+        for (var i = 0; i < audioElements.length; i++) {
+            var audioElement = audioElements[i];
+            if (audioElement !== currentAudioElement) {
+                audioElement.pause();
+            }
+        }
+    }
+          
+</script>
+<script>
+    
+</script>
+</body>
+</html>

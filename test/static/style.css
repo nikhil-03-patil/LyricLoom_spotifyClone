@@ -1,0 +1,90 @@
+/* static/style.css */
+body {
+  font-family: Arial, sans-serif;
+  background-image: url('/static/images/background.png'); /* Specify the path to your background image */
+  background-size: cover;
+  background-position: center;
+  height: 100vh; /* Ensure the background covers the entire viewport height */
+  margin: 0;
+  padding: 0;
+}
+.div1{
+  background-color: transparent;
+  width:30%;
+  float:right;
+  height:100vh;
+  align-items: center;
+}
+.div1 .container {
+  width: 300px;
+  margin: 0 auto;
+  padding: 30px;
+  text-align: left;
+  margin-right: 60px;
+  color:white;
+  margin-top: 25%;
+  margin-left: 5%;
+  align-items: center;
+  /* border: 1px solid #ccc;
+  border-radius: 5px; */
+  /* background-color: rgba(255, 255, 255, 0.8); Add a semi-transparent white background to the container */
+}
+.container.h4 {
+  text-align: left;
+  /* font-size: small; */
+  font-size: 1.5rem;
+}
+
+.div2{
+  background-color: transparent;
+  width:70%;
+  float:left;
+  margin-top: 20px;
+  margin-bottom: 2px;
+  padding-left: 650px;
+}
+.div2 .row{
+  font-size: smaller;
+}
+.div3 .row{
+  font-size: smaller;
+}
+.card {
+  width:350px;
+}
+.card-body {
+  font-size: smaller;
+}
+.div3{
+  background-attachment: transparent;
+  width:70%;
+  float:left;
+  margin-top: 30px;
+  padding-left: 650px;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="submit"] {
+  width: 120%;
+  padding: 8px;
+  margin-bottom: 30px;
+  margin-left: 5px;
+  box-sizing: border-box;
+  color:black;
+}
+
+input[type="submit"]
+{
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+.p{
+  text-align: left;
+}

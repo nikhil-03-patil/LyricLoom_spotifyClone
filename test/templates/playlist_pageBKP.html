@@ -1,0 +1,289 @@
+<head>
+    <title>Playlist Page</title>
+  </head>
+  <body>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/playlist.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='songs.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark" bg-body-tertiary>
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <img src="static/images/logo1.png" height="45px">
+            </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/index">LyricLoom</a>
+            </li>
+          <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/mymedia">My Media</a>
+              </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/account">My Profile</a>
+                </li>
+          <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/login">Logout</a>
+              </li>
+          <li>
+            <input class="form-control" type="text" value="{{ user_info.email }}" readonly>
+            {% if email %}
+            <p style="font-size: 16px; font-weight: bold; color: white;" type="text" value="{{ user_info.email }}">Email: {{ email }}</p>
+            {% endif %}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+      <div class="main-container">  
+        <div class="spotify-playlists">
+          <h2>LyricLoom Playlists</h2>
+      <div class="list">
+        <div class="spotify-playlists">
+          <h2>Mood</h2>
+          <form action= "/view_song" method = "GET">
+          <div class="list">
+          <div class="item" id="happyID" data-mood="Happy" onclick="fetchSongsByMood(this)">
+            <img src="static/images/happy.jpg"/>
+            <input class="form-control" type="hidden" value="Happy" id="moodTyp_happy">
+            <h4>Happy</h4>
+        </div>
+  
+            <div class="item" id="sadID" data-mood="Sad" onclick="fetchSongsByMood(this)">
+              <img src="static/images/sad.jpg"/>
+                <input class="form-control" type="hidden" value="Sad" id="moodTyp_sad">
+              <h4>Sad</h4>
+            </div>
+  
+            <div class="item" id="romanticID" data-mood="Romantic" onclick="fetchSongsByMood(this)">
+              <img src="static/images/romantic.jpg"/>
+                <input class="form-control" type="hidden" value="Romantic" id="moodTyp_romantic">
+              <h4>Romantic</h4>
+            </div>
+  
+            <div class="item" id="dancingID" data-mood="Dancing" onclick="fetchSongsByMood(this)">
+              <img src="static/images/dancing.jpg"/>
+                <input class="form-control" type="hidden" value="Dancing" id="moodTyp_dancing">
+              <h4>Dancing</h4>
+            </div>
+  
+            <div class="item" id="lofiID" data-mood="Lofi" onclick="fetchSongsByMood(this)">
+              <img src="static/images/lofi.jpg"/>
+                <input class="form-control" type="hidden" value="Lofi" id="moodTyp_lofi">
+              <h4>Lofi</h4>
+            </div>
+  
+          </div>
+        </form>
+          <div class="songs-list" id="mainDiv" > 
+            <table>
+              <thead>
+                <tr>
+                    <th>Album Cover</th>
+                    <th>Song Name</th>
+                    <th>Genre</th>
+                    <th>Duration</th>
+                    <th>Favorites</th>
+                    <th>Add</th>
+                </tr>
+            </thead>
+            <tbody id="songTableBody">
+              {% for song in songs %}
+                  <tr>
+                    <td><a href="#"><img<td><img src="data:image/jpeg;base64,{{ song.album_cover }}" alt="Album Cover" style="width:100px"></td>
+                      <td>{{ song.song_name }}</td>
+                      <td>{{ song.mood }}</td>
+                      <td>
+                        <div>
+                          <button onclick="playAudio('{{ song.id }}')">Play</button>
+                          <audio id="audio_{{ song.id }}" controls style="display: none;">
+                              <source src="data:audio/mpeg;base64,{{ song.song_value }}" type="audio/mp3">
+                              Your browser does not support the audio element.
+                          </audio>
+                      </div>
+                      </td>
+                      <td><i id="fav-icon" class="far fa-heart"></i> <!-- Fav icon --></td>
+                      <td> <i id="add-to-playlist" class="fas fa-plus"></i> <!-- Plus icon --></td>
+                  </tr>
+                  {% endfor %}
+            </tbody>
+          </table>
+          </div>
+          <hr>
+        </div> 
+      </div>
+     
+      <script
+        src="https://kit.fontawesome.com/23cecef777.js"
+        crossorigin="anonymous"
+      ></script>
+  
+  
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script>
+        function fetchSongsByMood(element) {
+            var mood = element.dataset.mood;
+            fetch('/view_song', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ mood: mood }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response data and update the playlist page
+                console.log(data);
+                // Assuming you have a function to render songs, call it here
+                renderSongs(data.songs);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        
+        // Define currentAudio globally
+  var currentAudio;
+  
+  function renderSongs(songs) {
+      // Code to render the songs on the playlist page
+      var tableBody = document.getElementById('songTableBody');
+      // Clear previous contents of the table body
+      tableBody.innerHTML = '';
+  
+      // Loop through the songs and create HTML elements for each song
+      songs.forEach(function(song) {
+          var row = document.createElement('tr');
+  
+          // Album Cover column
+          var albumCoverCell = document.createElement('td');
+          var albumCoverImg = document.createElement('img');
+          albumCoverImg.src = 'data:image/jpeg;base64,' + song.album_cover;
+          albumCoverImg.alt = 'Album Cover';
+          albumCoverImg.style.width = '100px';
+          albumCoverCell.appendChild(albumCoverImg);
+          row.appendChild(albumCoverCell);
+  
+          // Song Name column
+          var songNameCell = document.createElement('td');
+          songNameCell.textContent = song.song_name;
+          row.appendChild(songNameCell);
+  
+          // Genre column
+          var genreCell = document.createElement('td');
+          genreCell.textContent = song.mood;
+          row.appendChild(genreCell);
+  
+          // Duration column (assuming you have the duration of the song)
+          var durationCell = document.createElement('td');
+  
+          // Create custom play/pause button
+          var playButton = document.createElement('button');
+          playButton.textContent = 'Play';
+          var isPlaying = false;
+          playButton.addEventListener('click', function() {
+              if (isPlaying) {
+                  pauseSong();
+                  playButton.textContent = 'Play';
+              } else {
+                  playSong(song);
+                  playButton.textContent = 'Pause';
+                  updateMood(song); // Call updateMood function here
+              }
+              isPlaying = !isPlaying;
+          });
+          durationCell.appendChild(playButton);
+  
+          row.appendChild(durationCell);
+          // Favorites column
+          var favoritesCell = document.createElement('td');
+          var favoritesIcon = document.createElement('i');
+          favoritesIcon.className = 'far fa-heart';
+          favoritesCell.appendChild(favoritesIcon);
+          row.appendChild(favoritesCell);
+  
+          // Add column
+          var addToPlaylistCell = document.createElement('td');
+          var addToPlaylistIcon = document.createElement('i');
+          addToPlaylistIcon.className = 'fas fa-plus';
+          addToPlaylistCell.appendChild(addToPlaylistIcon);
+          row.appendChild(addToPlaylistCell);
+  
+          // Append the row to the table body
+          tableBody.appendChild(row);
+      });
+  }
+  
+  
+  // Function to play the song
+  function playSong(song) {
+    if (currentAudio) {
+        currentAudio.pause();
+    }
+    currentAudio = new Audio('data:audio/mpeg;base64,' + song.song_value);
+    currentAudio.play();
+  }
+  
+  // Function to pause the song
+  function pauseSong() {
+    if (currentAudio) {
+        currentAudio.pause();
+    }
+  }
+  
+  // Function to update mood via AJAX
+  function updateMood(song) {
+    // Getting the mood_type from the song object
+    var mood_type = song.mood;
+  
+    // Getting the user_name from the template variable
+    var user_name = "{{ user_info.email }}";
+    console.log("User Name:", user_name);
+      console.log("Mood Type:", mood_type);
+  
+  
+    $.ajax({
+        type: "POST",
+        url: "/update_mood",
+        contentType: "application/json", // Set the Content-Type header
+        data: JSON.stringify({
+            user_name: user_name,
+            mood_type: mood_type
+        }),
+        success: function(response) {
+            console.log("Mood updated successfully");
+            // Optionally, do something with the response if needed
+        },
+        error: function(error) {
+            console.error("Error updating mood:", error);
+        }
+    });
+  }
+        </script>
+      <script>
+        function addToLikedSongs(songId, mood) {
+          // Make an AJAX request to the Flask route
+          $.ajax({
+              url: '/add_to_liked_songs',
+              type: 'POST',
+              data: {
+                  'song_id': songId,
+                  'mood': mood
+              },
+              success: function(response) {
+                  // Handle success
+                  console.log(response);
+              },
+              error: function(xhr, status, error) {
+                  // Handle error
+                  console.error(error);
+              }
+          });
+      }
+      
+      </script>
+      
+    
+    </body>
+  </html>

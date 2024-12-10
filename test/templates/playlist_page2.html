@@ -1,0 +1,373 @@
+<head>
+  <title>Playlist Page</title>
+</head>
+<body>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="/static/playlist.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='songs.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+  <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark" bg-body-tertiary>
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <img src="static/images/logo1.png" height="45px">
+          </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/index.html">LyricLoom</a>
+          </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/mymedia">My Media</a>
+            </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/login">Logout</a>
+            </li>
+        <li>
+          <input class="form-control" type="text" value="{{ user_info.email }}" readonly>
+          {% if email %}
+          <p style="font-size: 16px; font-weight: bold; color: white;" type="text" value="{{ user_info.email }}">Email: {{ email }}</p>
+          {% endif %}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <div class="main-container">  
+      <div class="spotify-playlists">
+        <h2>LyricLoom Playlists</h2>
+    <div class="list">
+      <div class="spotify-playlists">
+        <h2>Mood</h2>
+        <div class="list">
+          <div class="item" id="happyID">
+            <img src="static/images/happy.jpg"/>
+            <div class="play">
+              <input class="form-control" type="hidden" value="Happy" id="moodTyp_happy">
+            </div>
+            <h4>Happy</h4>
+          </div>
+
+          <div class="item" id="sadID">
+            <img src="static/images/sad.jpg"/>
+            <div class="play">
+              
+              <input class="form-control" type="hidden" value="Sad" id="moodTyp_sad">
+            </div>
+            <h4>Sad</h4>
+          </div>
+
+          <div class="item" id="romanticID">
+            <img src="static/images/romantic.jpg"/>
+            <div class="play">
+              
+              <input class="form-control" type="hidden" value="Romantic" id="moodTyp_romantic">
+            </div>
+            <h4>Romantic</h4>
+          </div>
+
+          <div class="item" id="dancingID">
+            <img src="static/images/dancing.jpg"/>
+            <div class="play">
+              
+              <input class="form-control" type="hidden" value="Dancing" id="moodTyp_dancing">
+            </div>
+            <h4>Dancing</h4>
+          </div>
+
+          <div class="item" id="lofiID">
+            <img src="static/images/lofi.jpg"/>
+            <div class="play">
+              <input class="form-control" type="hidden" value="Lofi" id="moodTyp_lofi">
+            </div>
+            <h4>Lofi</h4>
+          </div>
+
+        </div>
+        <div class="songs-list" id="mainDiv" > 
+          <table>
+            <thead>
+              <tr>
+                  <th>Album Cover</th>
+                  <th>Song Name</th>
+                  <th>Genre</th>
+                  <th>Duration</th>
+                  <th>Favorites</th>
+                  <th>Add</th>
+              </tr>
+          </thead>
+              <tbody>
+                <tr>
+                  <td><img src="static/images/Chaleya.jpg" alt="Song 1"></td>
+                  <td>Chaleya</td>
+                  <td>Happy</td>
+                  <td><audio id="audio-player" controls>
+                    <source src="static\songs\Chaleya.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio></td>
+                  <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                  <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+              </tr>
+              
+              
+                  <tr>
+                      <td><img src="static/images/TumseHe.jpeg" alt="Song 2"></td>
+                      <td>Tumse hi</td>
+                      <td>Romantic</td>
+                      <td><audio id="audio-player" controls>
+                        <source src="static\songs\TumSeHi.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio></td>
+                      <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                      <td> 
+                        <i class="fas fa-plus"></i> <!-- Plus icon -->
+                      </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        <hr>
+      </div> 
+      <div class="songs-list" id="Happy_mainDiv" style="display: none;"> 
+          <p style="font-weight: bold; color: white; font-size: 25px;">Happy Songs</p>
+          <table>
+            <thead>
+              <tr>
+                  <th>Album Cover</th>
+                  <th>Song Name</th>
+                  <th>Genre</th>
+                  <th>Duration</th>
+                  <th>Favorites</th>
+                  <th>Add</th>
+              </tr>
+          </thead>
+              <tbody>
+                <tr>
+                  <td><img src="static/images/AgarTumSaathHo.jpg" alt="Song 1"></td>
+                  <td>Agar Tum Saath Ho</td>
+                  <td>Sad</td>
+                  <td><audio id="audio-player" controls>
+                    <source src="static\songs\AS\AgarTumSaathHo.mp3" type="audio/mpeg">
+                </audio></td>
+                  <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                  <td> <i class="fas fa-plus"></i> <!-- Plus icon --></td>
+              </tr>
+                  <tr>
+                      <td><img src="static/images/Bandeya.jpg" alt="Song 2"></td>
+                      <td>Bandeya</td>
+                      <td>Motivational</td>
+                      <td><audio id="audio-player" controls>
+                        <source src="static\songs\AS\Bandeya.mp3" type="audio/mpeg">
+                    </audio></td>
+                      <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                      <td> 
+                        <i class="fas fa-plus"></i> <!-- Plus icon -->
+                      </td>
+                  </tr>
+                  <tr>
+                      <td><img src="static/images/Chaleya.jpg" alt="Song 2"></td>
+                      <td>Chaleya</td>
+                      <td>Romantic,Dancing</td>
+                      <td><audio id="audio-player" controls>
+                        <source src="static\songs\AS\Chaleya.mp3" type="audio/mpeg">
+                    </audio></td>
+                      <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                      <td> 
+                        <i class="fas fa-plus"></i> <!-- Plus icon -->
+                      </td>
+                  </tr>
+                  <tr>
+                      <td><img src="static/images/HamariAdhuriKahani.jpg" alt="Song 2"></td>
+                      <td>Hamari Adhuri Kahani</td>
+                      <td>Alone Sad</td>
+                      <td><audio id="audio-player" controls>
+                        <source src="static\songs\AS\HamariAdhuriKahani.mp3" type="audio/mpeg">
+                    </audio></td>
+                      <td><i class="far fa-heart"></i> <!-- Fav icon --></td>
+                      <td> 
+                        <i class="fas fa-plus"></i> <!-- Plus icon -->
+                      </td>
+                  </tr>
+                  
+              </tbody>
+          </table>
+          </div>
+        </div>
+    </div>
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
+<script src="script.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+      $(document).ready(function() {
+          $("#happyID").click(function() {
+              // Getting the mood_type from the hidden input field
+              var mood_type = $("#moodTyp_happy").val();
+              
+              // Getting the user_name from the template variable
+              var user_name = "{{ user_info.email }}";
+              
+             // alert('You have clicked on Happy' + '--' + user_name + '--' + mood_type);
+              
+              // AJAX call to update_mood endpoint in app.py
+              $.ajax({
+                  type: "POST",
+                  url: "/update_mood",
+                  data: {
+                      user_name: user_name,
+                      mood_type: mood_type
+                  },
+                  success: function(response) {
+                      console.log("Mood updated successfully");
+                      // Optionally, do something with the response if needed
+                  },
+                  error: function(error) {
+                      console.error("Error updating mood:", error);
+                  }
+              });
+          });
+      });
+  </script>
+
+  <script>
+    $(document).ready(function() {
+        $("#sadID").click(function() {
+            // Getting the mood_type from the hidden input field
+            var mood_type = $("#moodTyp_sad").val();
+            
+            // Getting the user_name from the template variable
+            var user_name = "{{ user_info.email }}";
+            
+           // alert('You have clicked on Happy' + '--' + user_name + '--' + mood_type);
+            
+            // AJAX call to update_mood endpoint in app.py
+            $.ajax({
+                type: "POST",
+                url: "/update_mood",
+                data: {
+                    user_name: user_name,
+                    mood_type: mood_type
+                },
+                success: function(response) {
+                    console.log("Mood updated successfully");
+                    // Optionally, do something with the response if needed
+                },
+                error: function(error) {
+                    console.error("Error updating mood:", error);
+                }
+            });
+        });
+    });
+</script>
+<script>
+  $(document).ready(function() {
+      $("#romanticID").click(function() {
+          // Getting the mood_type from the hidden input field
+          var mood_type = $("#moodTyp_romantic").val();
+          
+          // Getting the user_name from the template variable
+          var user_name = "{{ user_info.email }}";
+          
+         // alert('You have clicked on Happy' + '--' + user_name + '--' + mood_type);
+          
+          // AJAX call to update_mood endpoint in app.py
+          $.ajax({
+              type: "POST",
+              url: "/update_mood",
+              data: {
+                  user_name: user_name,
+                  mood_type: mood_type
+              },
+              success: function(response) {
+                  console.log("Mood updated successfully");
+                  // Optionally, do something with the response if needed
+              },
+              error: function(error) {
+                  console.error("Error updating mood:", error);
+              }
+          });
+      });
+  });
+</script>
+<script>
+  $(document).ready(function() {
+      $("#dancingID").click(function() {
+          // Getting the mood_type from the hidden input field
+          var mood_type = $("#moodTyp_dancing").val();
+          
+          // Getting the user_name from the template variable
+          var user_name = "{{ user_info.email }}";
+          
+         // alert('You have clicked on Happy' + '--' + user_name + '--' + mood_type);
+          
+          // AJAX call to update_mood endpoint in app.py
+          $.ajax({
+              type: "POST",
+              url: "/update_mood",
+              data: {
+                  user_name: user_name,
+                  mood_type: mood_type
+              },
+              success: function(response) {
+                  console.log("Mood updated successfully");
+                  // Optionally, do something with the response if needed
+              },
+              error: function(error) {
+                  console.error("Error updating mood:", error);
+              }
+          });
+      });
+  });
+</script>
+<script>
+  $(document).ready(function() {
+      $("#lofiID").click(function() {
+          // Getting the mood_type from the hidden input field
+          var mood_type = $("#moodTyp_lofi").val();
+          
+          // Getting the user_name from the template variable
+          var user_name = "{{ user_info.email }}";
+          
+         // alert('You have clicked on Happy' + '--' + user_name + '--' + mood_type);
+          
+          // AJAX call to update_mood endpoint in app.py
+          $.ajax({
+              type: "POST",
+              url: "/update_mood",
+              data: {
+                  user_name: user_name,
+                  mood_type: mood_type
+              },
+              success: function(response) {
+                  console.log("Mood updated successfully");
+                  // Optionally, do something with the response if needed
+              },
+              error: function(error) {
+                  console.error("Error updating mood:", error);
+              }
+          });
+      });
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      const happyID = document.getElementById("happyID");
+      const mainDiv = document.getElementById("mainDiv");
+      const HappyMainDiv = document.getElementById("Happy_mainDiv");
+
+      happyID.addEventListener("click", function() {
+          mainDiv.style.display = "none";
+          HappyMainDiv.style.display = "block";
+      });
+  });
+</script>
+
+  
+  </body>
